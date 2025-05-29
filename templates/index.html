@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Inicio - Mi Página Web{% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1 class="display-4">¡Bienvenido a la Página de Aterrizaje!</h1>
+        <p class="lead">Esta es una plantilla básica para tu sitio web. Puedes personalizarla como desees.</p>
+        <hr class="my-4">
+        <p>Explora las diferentes secciones utilizando la barra de navegación.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Botón de ejemplo 1</a>
+        <a class="btn btn-secondary btn-lg" href="#" role="button">Botón de ejemplo 2</a>
+    </div>
+
+    {% if user_info %}
+        <div class="mt-5 p-4 border rounded">
+            <h2>Información del Usuario:</h2>
+            <p><strong>Nombre de Usuario:</strong> {{ user_info.username }}</p>
+            <p><strong>Nombre Completo:</strong> {{ user_info.nombre_completo }}</p>
+            <p><strong>Email:</strong> {{ user_info.email }}</p>
+        </div>
+    {% else %}
+        <div class="mt-5 p-4 border rounded bg-light">
+            <!-- CAMBIO AQUÍ: Enlaces separados -->
+            <p>Para ver tu información personalizada, por favor <a href="{{ url_for('login') }}">inicia sesión</a> o <a href="{{ url_for('register') }}">regístrate</a>.</p>
+        </div>
+    {% endif %}
+{% endblock %}

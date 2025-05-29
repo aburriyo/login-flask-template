@@ -1,0 +1,62 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex; /* Para que el footer se pegue abajo */
+    flex-direction: column; /* Para que el footer se pegue abajo */
+    min-height: 100vh; /* Para que el footer se pegue abajo */
+}
+
+/* Contenedor principal */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+    flex-grow: 1; /* Para que el footer se pegue abajo */
+}
+
+/* Barra de navegación (complementa a Bootstrap) */
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Jumbotron (para la página de inicio) */
+.jumbotron {
+    background-color: #e9ecef;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: .3rem;
+}
+
+/* Tarjetas para formularios de auth (complementa a Bootstrap) */
+.card {
+    margin-top: 20px;
+}
+
+/* Estilos para los mensajes flash (alertas) */
+.alert {
+    margin-bottom: 15px;
+}
+
+/* Pie de página (complementa a Bootstrap) */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 20px; /* Separación del contenido */
+}
+
+/* Clases de Bootstrap usadas en HTML:
+   - navbar, navbar-expand-lg, navbar-dark, bg-dark, container-fluid, navbar-brand, navbar-toggler, navbar-toggler-icon
+   - collapse, navbar-collapse, navbar-nav, nav-item, nav-link, ms-auto, navbar-text, me-3
+   - container, mt-4, alert, alert-danger, alert-warning, alert-success, alert-info, btn-close
+   - jumbotron (clase personalizada, Bootstrap 5 lo maneja con clases de utilidad), display-4, lead, my-4, btn, btn-primary, btn-lg, btn-secondary
+   - row, justify-content-center, col-md-8, col-lg-6, card, mb-4, card-header, card-body, form-label, form-control, btn-success
+   - bg-light, text-center, text-lg-start, mt-auto, py-3, p-3
+*/
