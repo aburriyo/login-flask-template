@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}CinePedia - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>CinePedia</h1>
+        <div>
+            <span class="me-3">Bienvenido, {{ session.user_nombre }}</span>
+            <a href="{{ url_for('nueva_pelicula') }}" class="btn btn-success me-2">Nueva Peli</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    {% if movies %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Película</th>
+                <th>Director</th>
+                <th>Fecha de Estreno</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td>{{ movie.titulo }}</td>
+                <td>{{ movie.director }}</td>
+                <td>{{ movie.fecha_estreno }}</td>
+                <td>
+                    <a href="{{ url_for('ver_pelicula', movie_id=movie.id) }}" class="btn btn-sm btn-info">Ver</a>
+                    {% if movie.user_id == user_id %}
+                    <a href="{{ url_for('editar_pelicula', movie_id=movie.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ url_for('borrar_pelicula', movie_id=movie.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de borrar esta película?')">Borrar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">
+        <p class="mb-0">No hay películas registradas. <a href="{{ url_for('nueva_pelicula') }}">Crea tu primera película</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

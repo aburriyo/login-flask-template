@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}CinePedia - Editar Película{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Editar Peli</h2>
+        <div>
+            <a href="{{ url_for('cine_dashboard') }}" class="btn btn-outline-primary me-2">Inicio</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('editar_pelicula', movie_id=movie.id) }}">
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Nombre de Peli</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ movie.titulo }}" required minlength="3">
+                        </div>
+                        <div class="mb-3">
+                            <label for="director" class="form-label">Director</label>
+                            <input type="text" class="form-control" id="director" name="director" value="{{ movie.director }}" required minlength="3">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_estreno" class="form-label">Fecha Estreno</label>
+                            <input type="date" class="form-control" id="fecha_estreno" name="fecha_estreno" value="{{ movie.fecha_estreno }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sinopsis" class="form-label">Sinopsis</label>
+                            <textarea class="form-control" id="sinopsis" name="sinopsis" rows="5" required minlength="3">{% if sinopsis %}{{ sinopsis }}{% else %}{{ movie.sinopsis }}{% endif %}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar Película</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

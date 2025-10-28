@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block title %}CinePedia - Ver Película{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Ver Peli</h2>
+        <div>
+            <a href="{{ url_for('cine_dashboard') }}" class="btn btn-outline-primary me-2">Inicio</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p><strong>Publicado por:</strong> {{ movie.creador_nombre }} {{ movie.creador_apellido }}</p>
+                    <p><strong>Director:</strong> {{ movie.director }}</p>
+                    <p><strong>Fecha:</strong> {{ movie.fecha_estreno }}</p>
+                    <p><strong>Sinopsis:</strong></p>
+                    <p>{{ movie.sinopsis }}</p>
+                </div>
+            </div>
+
+            {% if movie.user_id != session.user_id %}
+            <div class="card">
+                <div class="card-body">
+                    <h5>Escribe un comentario...</h5>
+                    <form method="POST" action="{{ url_for('comentar_pelicula', movie_id=movie.id) }}">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="contenido" name="contenido" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <p class="mb-0">No puedes comentar en tu propia película.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <h4>Comentarios</h4>
+            {% if comments %}
+                {% for comment in comments %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>{{ comment.usuario_nombre }} {{ comment.usuario_apellido }}</strong> - {{ comment.created_at|date_spanish }}
+                                <p class="mb-0">{{ comment.contenido }}</p>
+                            </div>
+                            {% if comment.user_id == session.user_id %}
+                            <a href="{{ url_for('borrar_comentario', comment_id=comment.id) }}" class="btn btn-sm btn-danger">Borrar</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">No hay comentarios aún.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
